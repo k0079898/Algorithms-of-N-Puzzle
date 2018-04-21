@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/k0079898/Algorithms_of_N-Puzzle#readme",
   "devDependencies": {
-    "webpack": "^4.6.0"
+    "webpack": "^4.6.0",
+    "webpack-cli": "^2.0.15"
   }
 }
