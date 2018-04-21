@@ -1,0 +1,22 @@
+{
+  "name": "algorithms_of_n-puzzle",
+  "version": "1.0.0",
+  "description": "Algorithms of N-puzzle",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/k0079898/Algorithms_of_N-Puzzle.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/k0079898/Algorithms_of_N-Puzzle/issues"
+  },
+  "homepage": "https://github.com/k0079898/Algorithms_of_N-Puzzle#readme",
+  "devDependencies": {
+    "webpack": "^4.6.0"
+  }
+}
