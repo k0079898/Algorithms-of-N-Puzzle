@@ -1,9 +1,12 @@
 {
   "name": "algorithms_of_n-puzzle",
   "version": "1.0.0",
-  "description": "Algorithms of N-puzzle",
-  "main": "src/main.js",
+  "description": "Algorithms of N-Puzzle",
+  "main": "index.js",
   "scripts": {
+    "build": "webpack -p",
+    "watch": "webpack -w",
+    "start": "webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,10 +20,21 @@
   },
   "homepage": "https://github.com/k0079898/Algorithms_of_N-Puzzle#readme",
   "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.11",
+    "style-loader": "^0.21.0",
     "webpack": "^4.6.0",
-    "webpack-cli": "^2.0.15"
+    "webpack-cli": "^2.0.15",
+    "webpack-config": "^7.5.0",
+    "webpack-dev-server": "^3.1.3"
   },
   "dependencies": {
-    "lodash": "^4.17.5"
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
   }
 }
