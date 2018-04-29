@@ -107,9 +107,7 @@ function init() {
 
       // Save to tree and queue
       let tf = checkMapExist(tree, newMap);
-      if (tf == true) {
 
-      }
     }
 
 
