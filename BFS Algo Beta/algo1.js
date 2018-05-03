@@ -113,10 +113,18 @@ var bfs = function (tree, queue, treeIndex) {
       queue.push(newNode);
       console.log("newNode: ", newNode)
     }
-    console.log("Queue: ", queue);
     /* check if last node is result, if yes than return */
     if(checkResult(newMap) == true) break;
   }
+}
+
+var savePath = function (tree, result, treeIndex) {
+    let node = tree[treeIndex];
+    while(node.parentIndex != -1) {
+      result.unshift(node.map);
+      node = tree[node.parentIndex];
+    }
+    result.unshift(node.map);
 }
 
 function init() {
@@ -126,7 +134,7 @@ function init() {
   let result = [];
 
   /* Generate a initial mapArray */
-  let mapArray = [1, 2, 3, 4, 6, 0, 7, 5, 8];
+  let mapArray = [1, 3, 0, 4, 2, 5, 7, 8 ,6];
 
   let initNode = {
     index: treeIndex,
@@ -142,8 +150,8 @@ function init() {
     //console.log(tree);
     //console.log("treeIndex", treeIndex);
   }
-  console.log("Result!!")
-
+  savePath(tree, result, treeIndex);
+  console.log("Result!!", result);
   // return result;
 };
 
