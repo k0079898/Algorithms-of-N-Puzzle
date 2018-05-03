@@ -5,10 +5,6 @@
 // 4 5 6
 // 7 8 0
 
-var stateQueue = [];
-var defaultMapArray = [1, 2, 3, 4, 5, 6, 7, 0, 8];
-var mapArray;
-
 window.onload = function() {
   init();
 };
@@ -82,33 +78,114 @@ var checkMapExist = function (tree, map) {
   return tf;
 }
 
+var checkResult = function (newMap) {
+  let isResult = [1, 2, 3, 4, 5, 6, 7, 8, 0];
+  let count = 0;
+  for(let i = 0 ; i < newMap.length ; i++) {
+      if(isResult[i] == newMap[i]) count++;
+  }
+  if(count == newMap.length) return true;
+  return false;
+}
+
+//BFS function
+var bfs = function (tree, queue, treeIndex) {
+  let node = queue.shift();
+  console.log("node",node);
+  let map = node.map;
+  let p_index = node.index;
+  let zeroPosition = map.findIndex(map => map === 0);
+  let possNextMove = nextMoveFunc(zeroPosition);
+
+  for (let i in possNextMove) {
+    let newMap = nextMapFunc(possNextMove[i], map.slice(), zeroPosition);
+    let tf = checkMapExist(tree, newMap);
+    if (tf == false) {
+      /* pack the new node */
+      treeIndex = treeIndex + 1;
+      let newNode = {
+         index: treeIndex,
+         parentIndex: p_index,
+         map: newMap
+      };
+      /* push new map in tree and queue */
+      tree.push(newNode);
+      queue.push(newNode);
+      console.log("newNode: ", newNode)
+    }
+    console.log("Queue: ", queue);
+    /* check if last node is result, if yes than return */
+    if(checkResult(newMap) == true) break;
+  }
+}
+
 function init() {
   let tree = [];
+  let queue = [];
   let treeIndex = 0;
-  // Create test case
-  for (let i = 0; i < 9; i++) {
+  let result = [];
 
-    mapArray = rightShiftFunc(defaultMapArray, i);
-    let node = {
-      index: treeIndex,
-      parentIndex: 0,
-      map: mapArray
-    };
-    tree.push(node);
+  /* Generate a initial mapArray */
+  let mapArray = [1, 2, 3, 4, 6, 0, 7, 5, 8];
 
-    // Calculate the allowedNextMove
-    var zeroPosition = node.map.findIndex(map => map === 0);
-    // console.log("zeroPosition: ", zeroPosition);
+  let initNode = {
+    index: treeIndex,
+    parentIndex: -1,
+    map: mapArray
+  };
+  tree.push(initNode);
+  queue.push(initNode);
 
-    var nextMove = nextMoveFunc(zeroPosition);
+  while(!checkResult(tree[treeIndex].map)) {
+    bfs(tree, queue, treeIndex);
+    treeIndex = tree.length - 1;
+    //console.log(tree);
+    //console.log("treeIndex", treeIndex);
+  }
+  console.log("Result!!")
 
-    for (let j in nextMove) {
-      let newMap = nextMapFunc(nextMove[j], mapArray.slice(), zeroPosition);
+  // return result;
+};
 
-      // Save to tree and queue
-      let tf = checkMapExist(tree, newMap);
 
-    }
+
+
+
+
+
+
+
+
+
+
+
+  //
+  // let tree = [];
+  // let treeIndex = 0;
+  // // Create test case
+  // for (let i = 0; i < 9; i++) {
+  //
+  //   mapArray = rightShiftFunc(defaultMapArray, i);
+  //   let node = {
+  //     index: treeIndex,
+  //     parentIndex: 0,
+  //     map: mapArray
+  //   };
+  //   tree.push(node);
+  //
+  //   // Calculate the allowedNextMove
+  //   var zeroPosition = node.map.findIndex(map => map === 0);
+  //   // console.log("zeroPosition: ", zeroPosition);
+  //
+  //   var nextMove = nextMoveFunc(zeroPosition);
+  //
+  //   for (let j in nextMove) {
+  //     let newMap = nextMapFunc(nextMove[j], mapArray.slice(), zeroPosition);
+  //
+  //     // Save to tree and queue
+  //     let tf = checkMapExist(tree, newMap);
+  //
+  //   }
 
 
 
@@ -121,5 +198,5 @@ function init() {
     // }
     //
     // stateQueue.push(newState);
-  };
-};
+  // };
+// };
