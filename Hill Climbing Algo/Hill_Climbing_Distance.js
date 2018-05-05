@@ -85,9 +85,37 @@ var checkResult = function (map) {
 
 var rectilinearDistance = function(map) {
   let d = 0;
-  for(let i = 0 ; i < map.length ; i++) {
-    if(i!=8 && map[i] != i+1 && map[i]!=0) d++;
-    else if(i==8 && map[i]!=0) d++;
+  for(let i = 0 ; i < 3 ; i++) {
+    for(let j = 0; j < 3 ; j++) {
+      switch (map[(i*3)+j]) {
+        case 1:
+          d = d + Math.abs(i-0) + Math.abs(j-0);
+          break;
+        case 2:
+          d = d + Math.abs(i-0) + Math.abs(j-1);
+          break;
+        case 3:
+          d = d + Math.abs(i-0) + Math.abs(j-2);
+          break;
+        case 4:
+          d = d + Math.abs(i-1) + Math.abs(j-0);
+          break;
+        case 5:
+          d = d + Math.abs(i-1) + Math.abs(j-1);
+          break;
+        case 6:
+          d = d + Math.abs(i-1) + Math.abs(j-2);
+          break;
+        case 7:
+          d = d + Math.abs(i-2) + Math.abs(j-0);
+          break;
+        case 8:
+          d = d + Math.abs(i-2) + Math.abs(j-1);
+          break;
+        default:
+          break;
+      }
+    }
   }
   return d;
 }
@@ -154,6 +182,7 @@ function init() {
   tree.push(initNode);
   stack.push(initNode);
 
+
   while(!checkResult(tree[treeIndex].map)) {
     hillClimbing(tree, stack, treeIndex);
     treeIndex = tree.length - 1;
@@ -163,4 +192,5 @@ function init() {
   savePath(tree, result, treeIndex);
   console.log("Tree: ", tree);
   console.log("Result!!", result);
+
 }
