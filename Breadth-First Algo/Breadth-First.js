@@ -27,25 +27,25 @@ var nextMapFunc = function(allowedNextMove, aMap, zeroPosition) {
   tempMap = aMap;
   switch (allowedNextMove) {
     case 0: // Up
-      console.log("Up");
+      //console.log("Up");
       var temp = tempMap[zeroPosition];
       tempMap[zeroPosition] = tempMap[zeroPosition-3];
       tempMap[zeroPosition-3] = temp;
       break;
     case 1: // Down
-      console.log("Down");
+      //console.log("Down");
       var temp = tempMap[zeroPosition];
       tempMap[zeroPosition] = tempMap[zeroPosition+3];
       tempMap[zeroPosition+3] = temp;
       break;
     case 2: // Left
-      console.log("Left");
+      //console.log("Left");
       var temp = tempMap[zeroPosition];
       tempMap[zeroPosition] = tempMap[zeroPosition-1];
       tempMap[zeroPosition-1] = temp;
       break;
     case 3: // Right
-      console.log("Right");
+      //console.log("Right");
       var temp = tempMap[zeroPosition];
       tempMap[zeroPosition] = tempMap[zeroPosition+1];
       tempMap[zeroPosition+1] = temp;
@@ -91,7 +91,7 @@ var checkResult = function (newMap) {
 //BFS function
 var bfs = function (tree, queue, treeIndex) {
   let node = queue.shift();
-  console.log("node",node);
+  //console.log("node",node);
   let map = node.map;
   let p_index = node.index;
   let zeroPosition = map.findIndex(map => map === 0);
@@ -134,7 +134,7 @@ function init() {
   let result = [];
 
   /* Generate a initial mapArray */
-  let mapArray = [1, 3, 0, 4, 2, 5, 7, 8 ,6];
+  let mapArray = [8, 6, 7, 2, 5, 4, 3, 0 ,1];
 
   let initNode = {
     index: treeIndex,
