@@ -111,7 +111,7 @@ var bfs = function (tree, queue, treeIndex) {
       /* push new map in tree and queue */
       tree.push(newNode);
       queue.push(newNode);
-      console.log("newNode: ", newNode)
+      //console.log("newNode: ", newNode)
     }
     /* check if last node is result, if yes than return */
     if(checkResult(newMap) == true) break;
@@ -134,7 +134,8 @@ function init() {
   let result = [];
 
   /* Generate a initial mapArray */
-  let mapArray = [8, 6, 7, 2, 5, 4, 3, 0 ,1];
+  //let mapArray = [8, 6, 7, 2, 5, 4, 3, 0 ,1]; /* 31 Step Testcase */
+  let mapArray = [3, 6, 8, 5, 1, 7, 2, 4, 0];
 
   let initNode = {
     index: treeIndex,
@@ -144,67 +145,19 @@ function init() {
   tree.push(initNode);
   queue.push(initNode);
 
+  let t1 = Date.now();
   while(!checkResult(tree[treeIndex].map)) {
     bfs(tree, queue, treeIndex);
     treeIndex = tree.length - 1;
     //console.log(tree);
     //console.log("treeIndex", treeIndex);
   }
+  let t2 = Date.now();
+  let time = (t2 - t1) / 1000;
+  console.log("Running Time: ", time);
+
   savePath(tree, result, treeIndex);
+  console.log("Tree: ", tree);
   console.log("Result!!", result);
   // return result;
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-  //
-  // let tree = [];
-  // let treeIndex = 0;
-  // // Create test case
-  // for (let i = 0; i < 9; i++) {
-  //
-  //   mapArray = rightShiftFunc(defaultMapArray, i);
-  //   let node = {
-  //     index: treeIndex,
-  //     parentIndex: 0,
-  //     map: mapArray
-  //   };
-  //   tree.push(node);
-  //
-  //   // Calculate the allowedNextMove
-  //   var zeroPosition = node.map.findIndex(map => map === 0);
-  //   // console.log("zeroPosition: ", zeroPosition);
-  //
-  //   var nextMove = nextMoveFunc(zeroPosition);
-  //
-  //   for (let j in nextMove) {
-  //     let newMap = nextMapFunc(nextMove[j], mapArray.slice(), zeroPosition);
-  //
-  //     // Save to tree and queue
-  //     let tf = checkMapExist(tree, newMap);
-  //
-  //   }
-
-
-
-    // var allowedNextMove =  allowedNextMoveFunc(node.parentsAction, zeroPosition);
-    //
-    // // Create nextMap
-    // for (i in newState.allowedNextMove){
-    //   tempMap = newState.map.slice();
-    //   var newMap = nextMapFunc(newState.allowedNextMove[i], tempMap, newState.zeroPosition)
-    // }
-    //
-    // stateQueue.push(newState);
-  // };
-// };

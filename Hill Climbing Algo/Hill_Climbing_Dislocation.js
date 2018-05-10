@@ -115,7 +115,7 @@ var hillClimbing = function(tree, stack, treeIndex) {
       /* push new map in tree and queue */
       tree.push(newNode);
       Tstack.push(newNode);
-      console.log("newNode: ", newNode)
+      //console.log("newNode: ", newNode)
       if(checkResult(newMap) == true) return;
     }
   }
@@ -144,7 +144,7 @@ function init() {
   let stack = [];
   let result = [];
 
-  let mapArray = [1, 2, 3, 4, 6, 0, 7, 5, 8];
+  let mapArray = [3, 6, 8, 5, 1, 7, 2, 4, 0];
   let initNode = {
     index: treeIndex,
     parentIndex: -1,
@@ -154,10 +154,14 @@ function init() {
   tree.push(initNode);
   stack.push(initNode);
 
+  let t1 = Date.now();
   while(!checkResult(tree[treeIndex].map)) {
     hillClimbing(tree, stack, treeIndex);
     treeIndex = tree.length - 1;
   }
+  let t2 = Date.now();
+  let time = (t2 - t1) / 1000;
+  console.log("Running Time: ", time);
 
   //return result;
   savePath(tree, result, treeIndex);

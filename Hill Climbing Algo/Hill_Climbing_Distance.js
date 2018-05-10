@@ -6,11 +6,11 @@
 // 7 8 0
 
 window.onload = function() {
-  init();
+  startHC_distance();
 };
 
 // Calculate the allowedNextMove;
-var nextMoveFunc = function(zeroPosition) {
+function nextMoveFunc(zeroPosition) {
   var notAllowMovePos = [[0, 1, 2],[6, 7, 8],[0, 3, 6], [2, 5, 8]]; //Up Down Left Right
   var tempMove = [];
 
@@ -23,7 +23,7 @@ var nextMoveFunc = function(zeroPosition) {
 }
 
 // Create nextMap
-var nextMapFunc = function(allowedNextMove, aMap, zeroPosition) {
+function nextMapFunc(allowedNextMove, aMap, zeroPosition) {
   tempMap = aMap;
   switch (allowedNextMove) {
     case 0: // Up
@@ -56,7 +56,7 @@ var nextMapFunc = function(allowedNextMove, aMap, zeroPosition) {
   return tempMap;
 }
 
-var checkMapExist = function (tree, map) {
+function checkMapExist(tree, map) {
   let tf = false;
   for (let i in tree) {
     let num = 0;
@@ -73,7 +73,7 @@ var checkMapExist = function (tree, map) {
   return tf;
 }
 
-var checkResult = function (map) {
+function checkResult(map) {
   let isResult = [1, 2, 3, 4, 5, 6, 7, 8, 0];
   let count = 0;
   for(let i = 0 ; i < map.length ; i++) {
@@ -83,7 +83,7 @@ var checkResult = function (map) {
   return false;
 }
 
-var rectilinearDistance = function(map) {
+function rectilinearDistance(map) {
   let d = 0;
   for(let i = 0 ; i < 3 ; i++) {
     for(let j = 0; j < 3 ; j++) {
@@ -120,7 +120,7 @@ var rectilinearDistance = function(map) {
   return d;
 }
 
-var hillClimbing = function(tree, stack, treeIndex) {
+function hillClimbing(tree, stack, treeIndex) {
   let node = stack.pop();
   let map = node.map;
   let p_index = node.index;
@@ -143,7 +143,7 @@ var hillClimbing = function(tree, stack, treeIndex) {
       /* push new map in tree and queue */
       tree.push(newNode);
       Tstack.push(newNode);
-      console.log("newNode: ", newNode)
+      //console.log("newNode: ", newNode)
       if(checkResult(newMap) == true) return;
     }
   }
@@ -157,7 +157,7 @@ var hillClimbing = function(tree, stack, treeIndex) {
   }
 }
 
-var savePath = function (tree, result, treeIndex) {
+function savePath(tree, result, treeIndex) {
     let node = tree[treeIndex];
     while(node.parentIndex != -1) {
       result.unshift(node.map);
@@ -166,13 +166,13 @@ var savePath = function (tree, result, treeIndex) {
     result.unshift(node.map);
 }
 
-function init() {
+export function startHC_distance() {
   let tree = [];
   let treeIndex = 0;
   let stack = [];
   let result = [];
 
-  let mapArray = [1, 2, 3, 4, 6, 0, 7, 5, 8];
+  let mapArray = [3, 6, 8, 5, 1, 7, 2, 4, 0];
   let initNode = {
     index: treeIndex,
     parentIndex: -1,
@@ -182,11 +182,14 @@ function init() {
   tree.push(initNode);
   stack.push(initNode);
 
-
+  let t1 = Date.now();
   while(!checkResult(tree[treeIndex].map)) {
     hillClimbing(tree, stack, treeIndex);
     treeIndex = tree.length - 1;
   }
+  let t2 = Date.now();
+  let time = (t2 - t1) / 1000;
+  console.log("Running Time: ", time);
 
   //return result;
   savePath(tree, result, treeIndex);
