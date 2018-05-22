@@ -1,0 +1,40 @@
+/* your styles go here */
+
+.eight-puzzle {
+  margin: 0px auto;
+  width: 272px;
+  /* 270 + 4 (borders) */
+  height: 272px;
+  /* 270 + 4 (borders) */
+  /*border: 2px solid #444444;*/
+  padding: 5px;
+  /*margin: 14px 0 0 14px;*/
+}
+
+.eight-puzzle ul {
+  margin: 0px auto;
+  padding: 0;
+  list-style: none;
+  font-size: 0;
+}
+
+.eight-puzzle li {
+  display: inline-block;
+  margin: 5px;
+  width: 76px;
+  height: 76px;
+  border: 2px solid #444444;
+  line-height: 76px;
+  font-size: 40px;
+  text-align: center;
+}
+
+.eight-puzzle li.incorrect {
+  background-color: #333333;
+  color: #dc3545;
+}
+
+.eight-puzzle li.correct {
+  background-color: #333333;
+  color: #20c997;
+}
