@@ -222,6 +222,7 @@ function bfs_start(mapArray) {
   console.log("Memory Used: ", size);
 
   savePath(tree, result, treeIndex);
+  console.log("Step: ", result.length-1);
   return result;
 };
 
@@ -292,6 +293,7 @@ function hillclimb_hamming_start(mapArray) {
 
   //return result;
   savePath(tree, result, treeIndex);
+  console.log("Step: ", result.length-1);
   return result;
 }
 
@@ -362,6 +364,7 @@ function hillclimb_manhattan_start(mapArray) {
 
   //return result;
   savePath(tree, result, treeIndex);
+  console.log("Step: ", result.length-1);
   return result;
 }
 
@@ -442,6 +445,7 @@ function astar_start(mapArray) {
   console.log("Memory Used: ", size);
 
   savePath(tree, result, treeIndex);
+  console.log("Step: ", result.length-1);
   return result;
 }
 
@@ -515,5 +519,6 @@ function idastar_start(mapArray) {
   console.log("Running Time: ", time);
 
   savePath(tree, result, tree.length-1);
+  console.log("Step: ", result.length-1);
   return result;
 }
