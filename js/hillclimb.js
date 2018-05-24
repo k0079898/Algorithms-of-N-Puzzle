@@ -83,7 +83,7 @@ var checkResult = function (map) {
   return false;
 }
 
-var rectilinearDistance = function(map) {
+var manhattanDistance = function(map) {
   let d = 0;
   for(let i = 0 ; i < 3 ; i++) {
     for(let j = 0; j < 3 ; j++) {
@@ -138,7 +138,7 @@ var hillClimbing = function(tree, stack, treeIndex) {
          index: treeIndex,
          parentIndex: p_index,
          map: newMap,
-         distance: rectilinearDistance(newMap)
+         distance: manhattanDistance(newMap)
       };
       /* push new map in tree and queue */
       tree.push(newNode);
@@ -177,7 +177,7 @@ function hillclimb_start(mapArray) {
     index: treeIndex,
     parentIndex: -1,
     map: mapArray,
-    distance: rectilinearDistance(mapArray)
+    distance: manhattanDistance(mapArray)
   };
   tree.push(initNode);
   stack.push(initNode);

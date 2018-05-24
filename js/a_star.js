@@ -78,7 +78,7 @@ var nextMapFunc = function(allowedNextMove, aMap, zeroPosition) {
   return tempMap;
 }
 
-var manhattanFunc = function(map) {
+var manhattanDistance = function(map) {
   let d = 0;
   for(let i = 0 ; i < 3 ; i++) {
     for(let j = 0; j < 3 ; j++) {
@@ -167,7 +167,7 @@ var a_star = function(tree, list, treeIndex) {
           parentIndex: p_index,
           map: nextMap,
           level: p_level+1,
-          distToTarget: manhattanFunc(nextMap),
+          distToTarget: manhattanDistance(nextMap),
         }
         // console.log("newNode", newNode);
         // console.log("index:", newNode.index, "price:", newNode.level+newNode.distToTarget,"newNode.map:", newNode.map);
@@ -206,7 +206,7 @@ var astar_start = function(mapArray) {
     parentIndex: -1,
     map: mapArray,
     level: 0,
-    distToTarget: manhattanFunc(mapArray),
+    distToTarget: manhattanDistance(mapArray),
   };
   tree.push(initNode);
   list.push(0);

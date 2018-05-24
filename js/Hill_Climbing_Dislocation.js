@@ -83,7 +83,7 @@ var checkResult = function (map) {
   return false;
 }
 
-var wrongPosition = function(map) {
+var hammingDistance = function(map) {
   let d = 0;
   for(let i = 0 ; i < map.length ; i++) {
     if(i!=8 && map[i] != i+1 && map[i]!=0) d++;
@@ -110,7 +110,7 @@ var hillClimbing = function(tree, stack, treeIndex) {
          index: treeIndex,
          parentIndex: p_index,
          map: newMap,
-         dislocation: wrongPosition(newMap)
+         dislocation: hammingDistance(newMap)
       };
       /* push new map in tree and queue */
       tree.push(newNode);
@@ -149,7 +149,7 @@ function init() {
     index: treeIndex,
     parentIndex: -1,
     map: mapArray,
-    dislocation: wrongPosition(mapArray)
+    dislocation: hammingDistance(mapArray)
   };
   tree.push(initNode);
   stack.push(initNode);

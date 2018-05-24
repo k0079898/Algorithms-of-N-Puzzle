@@ -3,7 +3,8 @@
 //window.onload = () => {
 $(document).ready(function () {
     //let tiles = [2, 3, 1, 4, 5, 6, 7, 8, 0];
-    let tiles = [3,0,2,6,5,1,4,7,8];
+    //let tiles = [8, 1, 2, 0, 4, 3, 7, 6, 5];
+    let tiles = [2, 3, 1, 4, 5, 6, 7, 8, 0]
 
     var $target = undefined;
 
@@ -58,8 +59,8 @@ $(document).ready(function () {
             tiles[targetIndex] = tiles[index];
             tiles[index] = temp;
             renderTiles();
-            console.log("index: ",index);
-            console.log("targetIndex: ",targetIndex);
+            //console.log("index: ",index);
+            //console.log("targetIndex: ",targetIndex);
         }
 
         event.preventDefault();
@@ -89,47 +90,52 @@ $(document).ready(function () {
     ];*/
 
   $('#bfsalgo').on('click', function (e) {
-        console.log("bfs algo btn click!");
+        //console.log("BFS Algo BTN click!");
         startbfs();
   });
 
   $('#hillclimb').on('click', function (e) {
-      console.log("hill climb btn click!");
+      //console.log("hill climb btn click!");
       starthillclimb();
   });
 
   $('#astar').on('click', function (e) {
-      console.log("a star btn click!");
+      //console.log("a star btn click!");
       startastar();
+  });
+
+  $('#idastar').on('click', function (e) {
+      //console.log("a star btn click!");
+      startidastar();
   });
 
   function startbfs(){
     var npuzzle = document.querySelectorAll('[data-tile]');
-    console.log("starting bfs");
+    //console.log("starting bfs");
     let bfs_result = bfs_start(tiles);
     var i;
     for (i = 1; i < bfs_result.length; i++) {
       let zeroindex = bfs_result[i].findIndex(function(element){return element == 0;});
-      console.log(bfs_result[i].findIndex(function(element){return element == 0;}));
+      //console.log(bfs_result[i].findIndex(function(element){return element == 0;}));
       setTimeout(function(){
         var npuzzle = document.querySelectorAll('[data-tile]');
         npuzzle[zeroindex].click();
-        console.log("puzzle location "+zeroindex+" clicked");
+        //console.log("puzzle location "+zeroindex+" clicked");
       },500*i);
     }
   }
   function starthillclimb(){
     var npuzzle = document.querySelectorAll('[data-tile]');
-    console.log("starting hill climbing");
-    let hill_result = hillclimb_start(tiles);
+    //console.log("starting hill climbing");
+    let hill_result = hillclimb_manhattan_start(tiles);
     var i;
     for (i = 1; i < hill_result.length; i++) {
       let zeroindex = hill_result[i].findIndex(function(element){return element == 0;});
-      console.log(hill_result[i].findIndex(function(element){return element == 0;}));
+      //console.log(hill_result[i].findIndex(function(element){return element == 0;}));
       setTimeout(function(){
         var npuzzle = document.querySelectorAll('[data-tile]');
         npuzzle[zeroindex].click();
-        console.log("puzzle location "+zeroindex+" clicked");
+        //console.log("puzzle location "+zeroindex+" clicked");
       },500*i);
     }
   }
@@ -139,11 +145,25 @@ $(document).ready(function () {
     var i;
     for (i = 1; i < star_result.length; i++) {
       let zeroindex = star_result[i].findIndex(function(element){return element == 0;});
-      console.log(star_result[i].findIndex(function(element){return element == 0;}));
+      //console.log(star_result[i].findIndex(function(element){return element == 0;}));
       setTimeout(function(){
         var npuzzle = document.querySelectorAll('[data-tile]');
         npuzzle[zeroindex].click();
-        console.log("puzzle location "+zeroindex+" clicked");
+        //console.log("puzzle location "+zeroindex+" clicked");
+      },500*i);
+    }
+  }
+  function startidastar(){
+    var npuzzle = document.querySelectorAll('[data-tile]');
+    let star_result = idastar_start(tiles);
+    var i;
+    for (i = 1; i < star_result.length; i++) {
+      let zeroindex = star_result[i].findIndex(function(element){return element == 0;});
+      //console.log(star_result[i].findIndex(function(element){return element == 0;}));
+      setTimeout(function(){
+        var npuzzle = document.querySelectorAll('[data-tile]');
+        npuzzle[zeroindex].click();
+        //console.log("puzzle location "+zeroindex+" clicked");
       },500*i);
     }
   }
