@@ -3,8 +3,12 @@
 //window.onload = () => {
 $(document).ready(function () {
     //let tiles = [2, 3, 1, 4, 5, 6, 7, 8, 0];
-    //let tiles = [8, 1, 2, 0, 4, 3, 7, 6, 5];
-    let tiles = [2, 3, 1, 4, 5, 6, 7, 8, 0]
+    //let tiles = [8, 6, 7, 2, 5, 4, 3, 0 ,1]; //31
+    let tiles = [8, 7, 4, 3, 2, 0, 6, 5, 1]; //25
+    //let tiles = [7, 3, 0, 5, 4, 8, 1, 2, 6]; //24
+    //let tiles = [2, 3, 1, 4, 5, 6, 7, 8, 0]; //16
+    //let tiles = [5, 1, 2, 6, 3, 0, 4, 7, 8]; //11
+    //let tiles = [2, 0 ,3, 1, 4, 6, 7, 5, 8]; //5
 
     var $target = undefined;
 
@@ -127,6 +131,7 @@ $(document).ready(function () {
   function starthillclimb(){
     var npuzzle = document.querySelectorAll('[data-tile]');
     //console.log("starting hill climbing");
+    //let hill_result = hillclimb_hamming_start(tiles);
     let hill_result = hillclimb_manhattan_start(tiles);
     var i;
     for (i = 1; i < hill_result.length; i++) {

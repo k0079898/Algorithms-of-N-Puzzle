@@ -280,7 +280,7 @@ function hillclimb_hamming_start(mapArray) {
 
   let t1 = Date.now();
   while(!checkResult(tree[treeIndex].map)) {
-    hillClimbing(tree, stack, treeIndex);
+    hillclimbing_hamming(tree, stack, treeIndex);
     treeIndex = tree.length - 1;
   }
   let t2 = Date.now();
@@ -368,7 +368,7 @@ function hillclimb_manhattan_start(mapArray) {
   return result;
 }
 
-var a_star = function(tree, list, treeIndex) {
+var a_star = function(tree, list) {
     // Find the smallest f(n) + g(n)
     // f(n) = tree.level
     // g(n) = distToTarget
@@ -405,7 +405,8 @@ var a_star = function(tree, list, treeIndex) {
           parentIndex: p_index,
           map: nextMap,
           level: p_level+1,
-          distToTarget: manhattanDistance(nextMap),
+          distToTarget: manhattanDistance(nextMap)
+          //distToTarget: hammingDistance(nextMap)
         }
         list.push(tree.length);
         tree.push(newNode);
@@ -426,14 +427,15 @@ function astar_start(mapArray) {
     parentIndex: -1,
     map: mapArray,
     level: 0,
-    distToTarget: manhattanDistance(mapArray),
+    distToTarget: manhattanDistance(mapArray)
+    //distToTarget: hammingDistance(mapArray)
   };
   tree.push(initNode);
   list.push(0);
 
   let t1 = Date.now();
   while(!checkResult(tree[treeIndex].map)) {
-    a_star(tree, list, treeIndex);
+    a_star(tree, list);
     treeIndex = tree.length - 1;
   }
   let t2 = Date.now();
@@ -446,6 +448,7 @@ function astar_start(mapArray) {
 
   savePath(tree, result, treeIndex);
   console.log("Step: ", result.length-1);
+  console.log(result);
   return result;
 }
 
@@ -520,5 +523,6 @@ function idastar_start(mapArray) {
 
   savePath(tree, result, tree.length-1);
   console.log("Step: ", result.length-1);
+  console.log(result);
   return result;
 }
