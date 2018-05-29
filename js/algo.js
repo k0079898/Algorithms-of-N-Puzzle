@@ -406,7 +406,6 @@ var a_star = function(tree, list) {
           map: nextMap,
           level: p_level+1,
           distToTarget: manhattanDistance(nextMap)
-          //distToTarget: hammingDistance(nextMap)
         }
         list.push(tree.length);
         tree.push(newNode);

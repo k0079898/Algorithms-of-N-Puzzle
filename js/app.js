@@ -130,7 +130,6 @@ $(document).ready(function () {
   }
   function starthillclimb(){
     var npuzzle = document.querySelectorAll('[data-tile]');
-    //console.log("starting hill climbing");
     //let hill_result = hillclimb_hamming_start(tiles);
     let hill_result = hillclimb_manhattan_start(tiles);
     var i;
