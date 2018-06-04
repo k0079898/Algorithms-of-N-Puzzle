@@ -84,6 +84,25 @@ function nextMapFunc(allowedNextMove, aMap, zeroPosition) {
   return tempMap;
 }
 
+function checkMapExistV2(tree, map, index) {
+  let tf = false;
+  let path  = [];
+  savePath(tree, path, index);
+  for (let i in path) {
+    let num = 0;
+    for(let j = 0 ; j < map.length ; j++) {
+        if(tree[i].map[j] == map[j]) {
+            num = num + 1;
+        }
+    }
+    if(num == map.length) {
+        tf = true;
+        break;
+    }
+  }
+  return tf;
+}
+
 function checkMapExist(tree, map) {
   let tf = false;
   for (let i in tree) {
@@ -280,7 +299,7 @@ function hillclimb_hamming_start(mapArray) {
 
   let t1 = Date.now();
   while(!checkResult(tree[treeIndex].map)) {
-    hillclimbing_hamming(tree, stack, treeIndex);
+    hillClimbing(tree, stack, treeIndex);
     treeIndex = tree.length - 1;
   }
   let t2 = Date.now();
@@ -368,7 +387,7 @@ function hillclimb_manhattan_start(mapArray) {
   return result;
 }
 
-var a_star = function(tree, list) {
+var a_star = function(tree, list, treeIndex) {
     // Find the smallest f(n) + g(n)
     // f(n) = tree.level
     // g(n) = distToTarget
@@ -405,7 +424,7 @@ var a_star = function(tree, list) {
           parentIndex: p_index,
           map: nextMap,
           level: p_level+1,
-          distToTarget: manhattanDistance(nextMap)
+          distToTarget: manhattanDistance(nextMap),
         }
         list.push(tree.length);
         tree.push(newNode);
@@ -426,15 +445,14 @@ function astar_start(mapArray) {
     parentIndex: -1,
     map: mapArray,
     level: 0,
-    distToTarget: manhattanDistance(mapArray)
-    //distToTarget: hammingDistance(mapArray)
+    distToTarget: manhattanDistance(mapArray),
   };
   tree.push(initNode);
   list.push(0);
 
   let t1 = Date.now();
   while(!checkResult(tree[treeIndex].map)) {
-    a_star(tree, list);
+    a_star(tree, list, treeIndex);
     treeIndex = tree.length - 1;
   }
   let t2 = Date.now();
@@ -447,7 +465,6 @@ function astar_start(mapArray) {
 
   savePath(tree, result, treeIndex);
   console.log("Step: ", result.length-1);
-  console.log(result);
   return result;
 }
 
@@ -466,7 +483,8 @@ var IDA_star_loop = function(node, bound, tree) {
 
     for (let i in possNextMove) {
         let newMap = nextMapFunc(possNextMove[i], map.slice(), zeroPosition);
-        let tf = checkMapExist(tree, newMap);
+
+        let tf = checkMapExistV2(tree, newMap, p_index);
         if (tf == false) {
             /* pack the new node */
             let newNode = {
@@ -502,6 +520,7 @@ function IDA_star(initMap) {
         let t = IDA_star_loop(initNode, bound, tree);
         let size = memorySizeOf(tree);
         console.log("IDA* Loop: ", i);
+        console.log("Bound: ", bound);
         console.log("Generated Node: ", tree.length);
         console.log("Memory Used: ", size);
         if(t === 'FOUND') break;
@@ -520,8 +539,8 @@ function idastar_start(mapArray) {
   let time = (t2 - t1) / 1000;
   console.log("Running Time: ", time);
 
+  console.log(tree);
   savePath(tree, result, tree.length-1);
   console.log("Step: ", result.length-1);
-  console.log(result);
   return result;
 }

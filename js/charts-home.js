@@ -1,7 +1,9 @@
 /*global $, document, Chart, LINECHART, data, options, window*/
-$(document).ready(function () {
+var adata1 = [];
+var adata2 = [];
+//$(document).ready(function () {
 
-    'use strict';
+    //'use strict';
 
     // ------------------------------------------------------- //
     // Line Chart
@@ -34,10 +36,10 @@ $(document).ready(function () {
             }
         },
         data: {
-            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17"],
+            labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21","22","23","24","25","26","27","28","29","30","31"],
             datasets: [
                 {
-                    label: "Algo.1",
+                    label: "A*",
                     fill: true,
                     lineTension: 0,
                     backgroundColor: "transparent",
@@ -56,11 +58,11 @@ $(document).ready(function () {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 0,
-                    data: [50, 20, 60, 31, 52, 22, 40, 25, 30, 68, 56, 40, 60, 43, 55, 39, 47],
+                    data: adata1,
                     spanGaps: false
                 },
                 {
-                    label: "Algo.2",
+                    label: "IDA*",
                     fill: true,
                     lineTension: 0,
                     backgroundColor: "transparent",
@@ -79,7 +81,7 @@ $(document).ready(function () {
                     pointHoverBorderWidth: 2,
                     pointRadius: 1,
                     pointHitRadius: 10,
-                    data: [20, 7, 35, 17, 26, 8, 18, 10, 14, 46, 30, 30, 14, 28, 17, 25, 17, 40],
+                    data: adata2,
                     spanGaps: false
                 }
             ]
@@ -91,7 +93,7 @@ $(document).ready(function () {
     // ------------------------------------------------------- //
     // Line Chart 1
     // ------------------------------------------------------ //
-    var LINECHART1 = $('#lineChart1');
+    /*var LINECHART1 = $('#lineChart1');
     var myLineChart = new Chart(LINECHART1, {
         type: 'line',
         options: {
@@ -249,6 +251,6 @@ $(document).ready(function () {
                 }
             ]
         }
-    });
+    });*/
 
-});
+//});
