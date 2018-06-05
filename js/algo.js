@@ -299,7 +299,7 @@ function hillclimb_hamming_start(mapArray) {
 
   let t1 = Date.now();
   while(!checkResult(tree[treeIndex].map)) {
-    hillClimbing(tree, stack, treeIndex);
+    hillclimbing_hamming(tree, stack, treeIndex);
     treeIndex = tree.length - 1;
   }
   let t2 = Date.now();
