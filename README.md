@@ -1,1 +1,1 @@
-# Algorithms_of_N-Puzzle
+# Algorithms_of_8-Puzzle
