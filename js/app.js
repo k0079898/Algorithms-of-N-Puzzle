@@ -22,7 +22,7 @@ $(document).ready(function() {
 
   if(checkSolvable(tiles)){
     document.getElementById('solveability').innerHTML = "(Solvable)";
-    console.log("text to solvable");
+    //console.log("text to solvable");
   }else{
     document.getElementById('solveability').innerHTML = "(Unsolvable)";
     console.log("unsolvable");
@@ -173,16 +173,16 @@ $(document).ready(function() {
 
   function startbfs(tile) {
     var npuzzle = document.querySelectorAll('[data-tile]');
-    console.log("starting bfs");
+    //console.log("starting bfs");
     let bfs_result = bfs_start(tile);
     var i;
     for (i = 1; i < bfs_result.length; i++) {
       let zeroindex = bfs_result[i].findIndex(function(element) {
         return element == 0;
       });
-      console.log(bfs_result[i].findIndex(function(element) {
+      /*console.log(bfs_result[i].findIndex(function(element) {
         return element == 0;
-      }));
+      }));*/
       setTimeout(function() {
         var npuzzle = document.querySelectorAll('[data-tile]');
         npuzzle[zeroindex].click();
@@ -200,8 +200,9 @@ $(document).ready(function() {
 
   function starthillclimb(tile) {
     var npuzzle = document.querySelectorAll('[data-tile]');
-    console.log("starting hill climbing");
+    //console.log("starting hill climbing");
     let hill_result = hillclimb_manhattan_start(tile);
+    //let hill_result = hillclimb_hamming_start(tile);
     var i;
     for (i = 1; i < hill_result.length; i++) {
       let zeroindex = hill_result[i].findIndex(function(element) {
@@ -245,8 +246,8 @@ $(document).ready(function() {
         var npuzzle = document.querySelectorAll('[data-tile]');
         npuzzle[zeroindex].click();
         //console.log("puzzle location " + zeroindex + " clicked");
-        console.log("count=",count);
-        console.log("manhattanDistance=",manhattanDistance(tiles_internal));
+        //console.log("count=",count);
+        //console.log("manhattanDistance=",manhattanDistance(tiles_internal));
         adata1.push(manhattanDistance(tiles_internal));
         myLineChart.update();
       }, 500 * i);
@@ -280,8 +281,8 @@ $(document).ready(function() {
         var npuzzle = document.querySelectorAll('[data-tile]');
         npuzzle[zeroindex].click();
         //console.log("puzzle location " + zeroindex + " clicked");
-        console.log("count=",count);
-        console.log("manhattanDistance=",manhattanDistance(tiles_internal));
+        //console.log("count=",count);
+        //console.log("manhattanDistance=",manhattanDistance(tiles_internal));
         adata2.push(manhattanDistance(tiles_internal));
         myLineChart.update();
       }, 500 * i);

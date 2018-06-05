@@ -468,7 +468,7 @@ function astar_start(mapArray) {
   return result;
 }
 
-var IDA_star_loop = function(node, bound, tree) {
+var IDA_star_loop = function(node, bound, tree, nodeExplo) {
     tree.push(node);
     let cost = node.level + node.distToTarget;
     if(cost > bound) return cost;
@@ -494,7 +494,8 @@ var IDA_star_loop = function(node, bound, tree) {
                level: p_level + 1,
                distToTarget: manhattanDistance(newMap)
             };
-            let t = IDA_star_loop(newNode, bound, tree);
+            if(checkMapExist(nodeExplo, newMap) == false) nodeExplo.push(newNode);
+            let t = IDA_star_loop(newNode, bound, tree, nodeExplo);
             if(t === 'FOUND') return 'FOUND';
             if(t < minCost) minCost = t;
         }
@@ -512,16 +513,19 @@ function IDA_star(initMap) {
     };
     let bound = initNode.distToTarget;
     let tree = [];
+    let nodeExplo = [];
     let i = 0;
     while(1) {
         i = i + 1;
 
         tree = [];
-        let t = IDA_star_loop(initNode, bound, tree);
-        let size = memorySizeOf(tree);
+        nodeExplo = [];
+        nodeExplo.push(initNode);
+        let t = IDA_star_loop(initNode, bound, tree, nodeExplo);
+        let size = memorySizeOf(nodeExplo);
         console.log("IDA* Loop: ", i);
         console.log("Bound: ", bound);
-        console.log("Generated Node: ", tree.length);
+        console.log("Generated Node: ", nodeExplo.length);
         console.log("Memory Used: ", size);
         if(t === 'FOUND') break;
         else bound = t;
@@ -539,7 +543,7 @@ function idastar_start(mapArray) {
   let time = (t2 - t1) / 1000;
   console.log("Running Time: ", time);
 
-  console.log(tree);
+  //console.log(tree);
   savePath(tree, result, tree.length-1);
   console.log("Step: ", result.length-1);
   return result;
