@@ -26,15 +26,11 @@ $(document).ready(function() {
 
   if(checkSolvable(tiles)){
     document.getElementById('solveability').innerHTML = "(Solvable)";
-<<<<<<< HEAD
     //console.log("text to solvable");
-=======
-    console.log("text to solvable");
     $('#bfsalgo').prop('disabled',false);
     $('#hillclimb').prop('disabled',false);
     $('#astar').prop('disabled',false);
     $('#idastar').prop('disabled',false);
->>>>>>> 4b505650c9cd636b2f75041652070bf9016cff38
   }else{
     document.getElementById('solveability').innerHTML = "(Unsolvable)";
     console.log("unsolvable");
@@ -164,12 +160,12 @@ $(document).ready(function() {
     tiles[6] = +document.getElementById("board7").value;
     tiles[7] = +document.getElementById("board8").value;
     tiles[8] = +document.getElementById("board0").value;
-    console.log("tiles:",tiles);
+    //console.log("tiles:",tiles);
     tiles_internal = tiles.slice(0,9);
-    console.log("tiles_internal:",tiles_internal);
+    //console.log("tiles_internal:",tiles_internal);
     if(checkSolvable(tiles)){
       document.getElementById('solveability').innerHTML = "(Solvable)";
-      console.log("text to solvable");
+      //console.log("text to solvable");
       renderTiles($('.eight-puzzle'));
       $('#bfsalgo').prop('disabled',false);
       $('#hillclimb').prop('disabled',false);
@@ -177,7 +173,7 @@ $(document).ready(function() {
       $('#idastar').prop('disabled',false);
     }else{
       document.getElementById('solveability').innerHTML = "(Unsolvable)";
-      console.log("text to unsolvable");
+      //console.log("text to unsolvable");
       renderTiles($('.eight-puzzle'));
       $('#bfsalgo').prop('disabled',true);
       $('#hillclimb').prop('disabled',true);

@@ -494,7 +494,7 @@ var IDA_star_loop = function(node, bound, tree, nodeExplo) {
                level: p_level + 1,
                distToTarget: manhattanDistance(newMap)
             };
-            if(checkMapExist(nodeExplo, newMap) == false) nodeExplo.push(newNode);
+            //if(checkMapExist(nodeExplo, newMap) == false) nodeExplo.push(newNode);
             let t = IDA_star_loop(newNode, bound, tree, nodeExplo);
             if(t === 'FOUND') return 'FOUND';
             if(t < minCost) minCost = t;
@@ -522,11 +522,11 @@ function IDA_star(initMap) {
         nodeExplo = [];
         nodeExplo.push(initNode);
         let t = IDA_star_loop(initNode, bound, tree, nodeExplo);
-        let size = memorySizeOf(nodeExplo);
+        //let size = memorySizeOf(nodeExplo);
         console.log("IDA* Loop: ", i);
         console.log("Bound: ", bound);
-        console.log("Generated Node: ", nodeExplo.length);
-        console.log("Memory Used: ", size);
+        //console.log("Generated Node: ", nodeExplo.length);
+        //console.log("Memory Used: ", size);
         if(t === 'FOUND') break;
         else bound = t;
     }
