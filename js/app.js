@@ -10,22 +10,34 @@ $(document).ready(function() {
 
   var checkSolvable = function(map) {
     let count = 0;
+    let sum = 0;
     for (let i = 0; i < 8; i++) {
       for (let j = i + 1; j < 9; j++) {
         if (map[i] > map[j] && map[i] != 0 && map[j] != 0) count = count + 1;
       }
     }
+    for (let i = 0; i <= 8; i++){
+      sum = sum + map[i];
+    }
     //console.log(count);
-    if (count % 2 == 0) return true;
+    if (count % 2 == 0 && sum == 36) return true;
     else return false;
   };
 
   if(checkSolvable(tiles)){
     document.getElementById('solveability').innerHTML = "(Solvable)";
     console.log("text to solvable");
+    $('#bfsalgo').prop('disabled',false);
+    $('#hillclimb').prop('disabled',false);
+    $('#astar').prop('disabled',false);
+    $('#idastar').prop('disabled',false);
   }else{
     document.getElementById('solveability').innerHTML = "(Unsolvable)";
     console.log("unsolvable");
+    $('#bfsalgo').prop('disabled',true);
+    $('#hillclimb').prop('disabled',true);
+    $('#astar').prop('disabled',true);
+    $('#idastar').prop('disabled',true);
   }
 
   var renderTiles = function($newTarget) {
@@ -155,10 +167,18 @@ $(document).ready(function() {
       document.getElementById('solveability').innerHTML = "(Solvable)";
       console.log("text to solvable");
       renderTiles($('.eight-puzzle'));
+      $('#bfsalgo').prop('disabled',false);
+      $('#hillclimb').prop('disabled',false);
+      $('#astar').prop('disabled',false);
+      $('#idastar').prop('disabled',false);
     }else{
       document.getElementById('solveability').innerHTML = "(Unsolvable)";
       console.log("text to unsolvable");
       renderTiles($('.eight-puzzle'));
+      $('#bfsalgo').prop('disabled',true);
+      $('#hillclimb').prop('disabled',true);
+      $('#astar').prop('disabled',true);
+      $('#idastar').prop('disabled',true);
     }
   });
 
